@@ -19,7 +19,7 @@
         <li><a href="#header">To Top</a></li>
         <li>About</li>
         <li>Getting Started</li>
-        <li id="LoginBTN">Login</li>
+        <li id="login-button">Login</li>
     </ul>
 
     <button id="DarkLightBTN"></button>
@@ -33,10 +33,21 @@
     </section>
 
     <section id="About">
+        <h2>About</h2>
+        <p>This web app was create by me Gabriel Holmquist, to enhance my character creation and gameplay experience of Cyberpunk 2020 the Table Top Role Playing Game (TTRPG). While I love this game those either un initiated into TTRPG specifically Path Finder and Dungeons and Dragons, might find Cyberpunks character creation confusing or irritating. My goal with this site was to make an easier way for specifically my friends and those new to the paper versions of cyberpunk to immerse themselves in my option one of the most engaging character creation systems.</p>
 
     </section>
 
     <section id="GettingStarted">
+        <h2>Getting Started</h2>
+        <p>To get started I would recommend you have either a paper or electronic copy of the Cyberpunk 2020 handbook. I own both and can vouch for your local game store or amazon of a paper copy, or DriveThruRpg for a digital copy. It is worth nothing DriveThruRPG has a lot of cool stuff in general and is worth browsing! Next I would move to (href link) and jump right in to naming and generating your resident of Night City! </p>
+
+        <ul>
+            <lh>What's needed at a glance: </lh>
+            <li>Cyberpunk 2020 Book (highly recommended)</li>
+            <li>Approx.. 20-30mins</li>
+            <li>Google login (integration WIP)</li>
+        </ul>
 
     </section>
 
@@ -44,29 +55,6 @@
         
     </section>
 
-
-    <!-- Login Example -->
-    <section>
-    <h1>AuthKit example</h1>
-    <p>This is an example of how to use AuthKit with an HTML frontend.</p>
-    <p>
-      <a href="/login">Sign in</a>
-    </p>
-    <form action="/logout" method="POST" id="logout-form">
-      <input type="hidden" name="_csrf" id="csrf-token" />
-      <button type="submit">Sign out</button>
-    </form>
-
-    <script>
-      // Fetch CSRF token on page load
-      fetch('/csrf-token')
-        .then((r) => r.json())
-        .then((data) => {
-          document.getElementById('csrf-token').value = data.csrfToken;
-        });
-    </script>
-    </section>
-    
     <script src="src/script.js"></script>
 </body>
 

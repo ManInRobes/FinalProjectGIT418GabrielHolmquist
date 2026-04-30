@@ -1,5 +1,24 @@
 /* Author Gabriel Holmquist */
 
+/* Fonts */
+.karantina-light {
+  font-family: "Karantina", system-ui;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.karantina-regular {
+  font-family: "Karantina", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.karantina-bold {
+  font-family: "Karantina", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
 /* The site will be a single page, and should display properly at 1280px wide */
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -50,3 +69,206 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+/* Variables */
+
+:root{
+    --primary-background: #FFFFFF;
+    --primary-section: #2D2D2D;
+
+}
+
+/* Styles */
+
+#LogoImg{
+    position: relative;
+    left: 20px;
+    top: 12px;
+    max-width: 162px;
+    height: 162px;
+}
+
+header{
+    background-color: var(--primary-section);
+    display: flex;
+    flex-direction: row;
+    position: sticky;
+    top: 0;
+    margin-bottom: 65px;
+    font-family: 'Karantina', system-ui, sans-serif;
+    font-size: 48;
+    font-weight: 500;
+    max-height: 124px;
+    z-index: 5;
+}
+
+
+#HeroImage{
+    max-width: 1280px;
+    height: auto;
+}
+
+h1{
+    position: relative;
+    top: 51px;
+    left: 58px;
+    color: black;
+    font-size: 96pt;
+    font-family: 'Karantina', system-ui, sans-serif;
+}
+
+#HeroImageSection h2{
+    position: relative;
+    color: black;
+    font-size: 64pt;
+    font-family: 'Karantina', system-ui, sans-serif;
+    left: 770px;
+    top: -71px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #181818;
+  color: white;
+  font-size: 36px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#ToTopMenu{
+    position: relative;
+    left: 120px;
+    top: 21px;
+    height: 76px;
+    font-size: 48px;
+}
+
+#AboutMenu{
+    position: relative;
+    left: 170px;
+    top: 35px;
+    height: 55px;
+}
+
+#GettingStartedMenu{
+    position: relative;
+    left: 210px;
+    top: 35px;
+    height: 55px;
+}
+
+#status{
+    font-family: 'Karantina', system-ui, sans-serif;
+    background-color: #181818;
+    color: white;
+    font-size: 24px;
+    max-height: 55px;
+    padding: 10px 20px;
+    position: relative;
+    top: 35px;
+    left: 250px;
+}
+
+#actionButton{
+    font-family: 'Karantina', system-ui, sans-serif;
+    background-color: #181818;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    position: relative;
+    left: 270px;
+    top: 35px;
+    max-height: 55px;
+}
+
+body{
+        margin: 0 auto;
+        max-width: 1280px;
+        height: 100vh;
+        background-color: #f0f0f0;
+        transition: background-color 0.5s;
+        text-align: center;
+        font-family: 'Karantina', system-ui, sans-serif;
+    }
+
+    /* 2. Adjust size of the toggle */
+    .theme-toggle {
+        position: relative;
+        color: #181818;
+        font-size: 5rem; /* Scale the icon size here */
+        border: none;
+        background: none;
+        cursor: pointer;
+        outline: none;
+
+        width: 59px;
+        height: 59px;
+        left: 300px;
+        top: 25px;
+
+    }
+
+    /* Dark mode styles */
+    .dark-mode {
+        background-color: #1a1a1a;
+    }
+    .dark-mode .theme-toggle {
+        color: #ffcc00;
+    }
+
+    body section{
+        background-color: var(--primary-section);
+        color: var(--primary-background);
+        margin-bottom: 35px;
+        width: 1280px;
+        height: 697px;
+        border-radius: 25px;
+    }
+
+    #HeroImageSection{
+        background-color: #D9D9D9 ;
+    }
+
+    body section h2{
+    position: relative;
+    top: 47px;
+    width: 431px;
+    left: 20px;
+    color: var(--primary-background);
+    font-family: Karantina;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    }
+
+    body section p{
+    position: relative;
+    top: 80px;
+    margin: 0 auto;
+    width: 933px;
+    color: var(--primary-background);
+    text-align: left;
+    font-family: Lexend;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 49px; /* 153.125% */
+    }
+
+    #GettingStarted ul{
+    position: relative;
+    color: #FFF;
+    text-align: center;
+    font-family: Lexend;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 43px; /* 179.167% */
+    top: 120px;
+    }
+
