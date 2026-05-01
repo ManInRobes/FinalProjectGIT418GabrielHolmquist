@@ -272,3 +272,113 @@ body{
     top: 120px;
     }
 
+
+/* Character editing styling */
+#UserCharacters {
+    min-height: fit-content;
+    display: flex; 
+    flex-direction: column;
+    /* Use padding to ensure the content is padded inside the container */
+    padding-bottom: 35px; 
+}
+
+#UserCharHeader{
+    position: unset;
+    margin-top: 25px;
+}
+
+/* Container for all character cards */
+.roster-container {
+    background-color: #D9D9D9;
+}
+
+/* Main card for each character */
+.cp2020-card {
+    /* REMOVED position: relative; and top: 35px; */
+    margin: 0 auto;
+    border-radius: 25px;
+    margin-top: 32px;
+    background-color: #D9D9D9;
+    min-height: fit-content;
+    max-width: 1222px;
+    width: 90%; /* Ensures it scales correctly inside its parent */
+}
+
+/* Header section containing the name and role */
+.cp2020-card .header {
+    /* Changed position to static/default flow */
+    color: var(--primary-section);
+    font-family: Karantina;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    margin-top: 15px; /* Replaces top: 15px */
+}
+
+/* Grid container for character stats */
+.cp2020-card .stats-grid {
+    margin-top: 25px;
+    justify-content: center; 
+    display: flex;
+    flex-direction: row;
+}
+
+/* Individual stat box */
+.cp2020-card .stat-box {
+    color: #000;
+    text-align: center;
+    font-family: Karantina;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 45px;
+    margin: 0 15px;
+}
+
+/* Stat value */
+.cp2020-card .stat-value {
+    position: relative;
+    margin: 0 auto;
+    width: 30px;
+    background-color: #ce5959;
+}
+
+/* Details section */
+.cp2020-card .details-section {
+    color: #000;
+    font-family: Karantina;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 45px;
+    text-align: center;
+}
+
+/* Paragraph tags inside the details section */
+.cp2020-card .details-section p {
+    all: unset;
+    clear: initial;
+    color: #000;
+    font-family: Karantina;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 25px;
+    text-align: center;
+    margin: 25px 0; /* Adjusted margin to keep layout within box model */
+}
+
+/* New button section styles */
+.cp2020-card .button-section {
+    margin: 25px;
+}
+
+/* Button for opening the edit mode */
+.cp2020-card .edit-btn {
+    filter: drop-shadow(4px 8px 3px rgba(0, 0, 0, 0.50));
+
+}
+
+
