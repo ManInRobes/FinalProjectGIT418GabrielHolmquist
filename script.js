@@ -1,134 +1,322 @@
-const statusDiv = document.getElementById('status');
+// ============================================================
+// CONFIG
+// ============================================================
+const BASE_URL = 'https://bceb3183-63d1-4841-bb77-a2804fe906ff.mock.pstmn.io';
+const POSTMAN_API_KEY = localStorage.getItem('postman_api_key') || 'PMAK-69f4ed3226184d00019c7576-cb9b87a1f005e6778033417af2cc7ebe8a';
 
-        const btn = document.getElementById('actionButton');
+// ============================================================
+// AUTH STATE
+// ============================================================
+let authToken = localStorage.getItem('user_char_token') || null;
+let currentUser = localStorage.getItem('current_user') || null;
 
-        // 1. Check if the user has been here before
-        const hasVisited = localStorage.getItem('hasVisited');
+// ============================================================
+// LOCAL CHARACTER STORE
+// ============================================================
+let localCharacters = JSON.parse(localStorage.getItem('local_characters') || '[]');
 
-        if (!hasVisited) {
-            // First time logic
-            statusDiv.innerText = "Welcome! Create an account.";
-            btn.innerText = "Get Started";
-            
-            // Set the flag so next time they are "Returning"
-            localStorage.setItem('hasVisited', 'true');
-        } else {
-            // Returning visitor logic
-            statusDiv.innerText = "Welcome back, friend!";
-            btn.innerText = "Continue Journey";
-        }
+function saveLocalCharacters() {
+    localStorage.setItem('local_characters', JSON.stringify(localCharacters));
+}
 
-        // // Optional: Reset button for testing purposes
-        // btn.addEventListener('click', () => {
-        //     alert("Button clicked! The script knows you've been here.");
-        // });
+function generateId() {
+    return 'char_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+}
+
+// ============================================================
+// FIRST-VISIT / RETURNING VISITOR LOGIC
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+    const isReturning = localStorage.getItem('hasVisited');
+    const statusDiv = document.getElementById('status');
+
+    if (isReturning) {
+        if (statusDiv) statusDiv.textContent = 'Welcome Back!';
+    } else {
+        localStorage.setItem('hasVisited', 'true');
+        if (statusDiv) statusDiv.textContent = 'New Here? Register!';
+    }
+
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
         const toggleBtn = document.getElementById('light-switch');
-        
-        toggleBtn.addEventListener('click', () => {
-            // This class triggers the CSS animation from the stylesheet
-            toggleBtn.classList.toggle('theme-toggle--toggled');
-            
-            // This handles your actual page theme
-            document.body.classList.toggle('dark-mode');
-        });
+        if (toggleBtn) toggleBtn.classList.add('theme-toggle--toggled');
+    }
 
-        // For Cyberpunk Characters
+    const toggleBtn = document.getElementById('light-switch');
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleDarkMode);
 
-    async function fetchCharacters() {
-    try {
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) loginForm.addEventListener('submit', handleLogin);
 
-        // const response = await fetch(API_URL);
-        // const characters = await response.json();
-        
-        // Mock data array of multiple characters
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) registerForm.addEventListener('submit', handleRegister);
 
-        // Test Variables
-        const characters = [
-            {
-                id: 1,
-                name: "Jax \"V\" Mercer",
-                handle: "Razorwire",
-                role: "Solo",
-                humanity: 45,
-                specialAbility: "Combat Sense (6)",
-                stats: { INT: 6, REF: 9, TECH: 4, COOL: 8, ATTR: 5, LUCK: 7 }
-            },
-            {
-                id: 2,
-                name: "Sarah Chen",
-                handle: "Ghost",
-                role: "Netrunner",
-                humanity: 30,
-                specialAbility: "Interface (8)",
-                stats: { INT: 10, REF: 6, TECH: 7, COOL: 6, ATTR: 5, LUCK: 5 }
-            },
-            {
-                id: 3,
-                name: "Deckard Vance",
-                handle: "Drifter",
-                role: "Nomad",
-                humanity: 60,
-                specialAbility: "Family (5)",
-                stats: { INT: 5, REF: 7, TECH: 8, COOL: 7, ATTR: 4, LUCK: 6 }
-            }
-        ];
+    const charForm = document.getElementById('characterForm');
+    if (charForm) charForm.addEventListener('submit', handleFormSubmit);
 
-        const nestContainer = document.getElementById('UserCharacters');
-        nestContainer.innerHTML = '<h2 id="UserCharHeader">Characters:</h2>';
+    updateAuthUI();
 
-        
-        characters.forEach(char => {
-            // Generate the inner stat boxes for each character
-            let statsHTML = '';
-            for (const [stat, value] of Object.entries(char.stats)) {
-                statsHTML += `
-                    <div class="stat-box">
-                        <div class="stat-title">${stat}</div>
-                        <div class="stat-value">${value}</div>
-                    </div>
-                `;
-            }
+    if (authToken) {
+        renderCharacters(localCharacters);
+    }
+});
 
-            // Create the full card element for the character
-            const cardHTML = `
-                <div class="cp2020-card">
-                    <div class="header">
-                        <div class="name">${char.name}</div>
-                        <div class="role">${char.role.toUpperCase()}</div>
-                    </div>
-                    
-                    <div class="stats-grid">
-                        ${statsHTML}
-                    </div>
+// ============================================================
+// DARK MODE
+// ============================================================
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const toggleBtn = document.getElementById('light-switch');
+    if (toggleBtn) toggleBtn.classList.toggle('theme-toggle--toggled');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
 
-                    <div class="details-section">
-                        <p><strong>Handle:</strong> ${char.handle}</p>
-                        <p><strong>Humanity:</strong> ${char.humanity}</p>
-                        <p><strong>Special Ability:</strong> ${char.specialAbility}</p>
-                    </div>
+// ============================================================
+// AUTH UI
+// ============================================================
+function updateAuthUI() {
+    const statusDiv = document.getElementById('status');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const authSection = document.getElementById('authSection');
+    const charSection = document.getElementById('UserCharacters');
+    const formSection = document.getElementById('characterFormSection');
 
-                    <div class="button-section">
-                        <button class="edit-btn" onclick="openEditModal(${char.id})">Edit Character</button>
-                    </div>
-                </div>
-            `;
-
-            nestContainer.insertAdjacentHTML('beforeend', cardHTML);
-        });
-
-    } catch (error) {
-        console.error("Error loading roster data:", error);
-        document.getElementById('nestContainer').innerHTML = '<div style="color: #ff0055;">SYSTEM ERROR: Roster offline.</div>';
+    if (authToken) {
+        if (statusDiv) statusDiv.textContent = currentUser ? `Logged in as ${currentUser}` : 'Logged In';
+        if (logoutBtn) logoutBtn.style.display = 'inline-block';
+        if (authSection) authSection.style.display = 'none';
+        if (charSection) charSection.style.display = 'block';
+        if (formSection) formSection.style.display = 'block';
+    } else {
+        if (statusDiv) statusDiv.textContent = localStorage.getItem('hasVisited') ? 'Welcome Back! Please Login.' : 'New Here? Register!';
+        if (logoutBtn) logoutBtn.style.display = 'none';
+        if (authSection) authSection.style.display = 'block';
+        if (charSection) charSection.style.display = 'none';
+        if (formSection) formSection.style.display = 'none';
     }
 }
 
-// Function placeholder for your editing functionality
-function openEditModal(characterId) {
-    console.log("Editing character with ID:", characterId);
-    // You can add your modal-opening or routing logic here
-    alert("Editing feature is being set up for character ID: " + characterId);
+function logout() {
+    authToken = null;
+    currentUser = null;
+    localStorage.removeItem('user_char_token');
+    localStorage.removeItem('current_user');
+    updateAuthUI();
+    const list = document.getElementById('characterList');
+    if (list) list.innerHTML = '';
 }
 
-// Initialize on page load
-fetchCharacters();
+// ============================================================
+// AUTH — LOGIN
+// ============================================================
+async function handleLogin(e) {
+    e.preventDefault();
+    const username = document.getElementById('loginUsername').value.trim();
+    const password = document.getElementById('loginPassword').value.trim();
 
+    try {
+        const res = await fetch(`${BASE_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'x-api-key': POSTMAN_API_KEY },
+            body: JSON.stringify({ username, password })
+        });
+
+        if (!res.ok) throw new Error(`Login failed: ${res.status}`);
+
+        const data = await res.json();
+        authToken = data.token || data.access_token || 'mock-token';
+        currentUser = username;
+        localStorage.setItem('user_char_token', authToken);
+        localStorage.setItem('current_user', currentUser);
+        document.getElementById('loginPassword').value = '';
+        updateAuthUI();
+        renderCharacters(localCharacters);
+    } catch (err) {
+        console.error(err);
+        alert(`Login error: ${err.message}`);
+    }
+}
+
+// ============================================================
+// AUTH — REGISTER
+// ============================================================
+async function handleRegister(e) {
+    e.preventDefault();
+    const username = document.getElementById('registerUsername').value.trim();
+    const password = document.getElementById('registerPassword').value.trim();
+
+    try {
+        const res = await fetch(`${BASE_URL}/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'x-api-key': POSTMAN_API_KEY },
+            body: JSON.stringify({ username, password })
+        });
+
+        if (!res.ok) throw new Error(`Registration failed: ${res.status}`);
+
+        alert('Registered successfully! Please log in on the left.');
+        document.getElementById('registerForm').reset();
+    } catch (err) {
+        console.error(err);
+        alert(`Registration error: ${err.message}`);
+    }
+}
+
+// ============================================================
+// CHARACTERS — RENDER
+// ============================================================
+function renderCharacters(characters) {
+    const list = document.getElementById('characterList');
+    if (!list) return;
+
+    if (!characters || !characters.length) {
+        list.innerHTML = '<p>No characters yet. Create one below!</p>';
+        return;
+    }
+
+    list.innerHTML = characters.map(char => {
+        const stats = char.stats || {};
+        return `
+            <div class="cp2020-card character-card" data-id="${char.id}">
+                <div class="header">
+                    <div class="name">${char.name || 'Unknown'}</div>
+                    <div class="role">${char.role ? char.role.toUpperCase() : 'N/A'}</div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box"><div class="stat-title">INT</div><div class="stat-value">${stats.INT ?? '-'}</div></div>
+                    <div class="stat-box"><div class="stat-title">REF</div><div class="stat-value">${stats.REF ?? '-'}</div></div>
+                    <div class="stat-box"><div class="stat-title">TECH</div><div class="stat-value">${stats.TECH ?? '-'}</div></div>
+                    <div class="stat-box"><div class="stat-title">COOL</div><div class="stat-value">${stats.COOL ?? '-'}</div></div>
+                    <div class="stat-box"><div class="stat-title">ATTR</div><div class="stat-value">${stats.ATTR ?? '-'}</div></div>
+                    <div class="stat-box"><div class="stat-title">LUCK</div><div class="stat-value">${stats.LUCK ?? '-'}</div></div>
+                </div>
+                <div class="details-section">
+                    <p><strong>Handle:</strong> ${char.handle || ''}</p>
+                    <p><strong>Humanity:</strong> ${char.humanity ?? 'N/A'}</p>
+                    <p><strong>Special Ability:</strong> ${char.specialAbility || 'N/A'}</p>
+                </div>
+                <div class="button-section">
+                    <button class="edit-btn" onclick='openEditModal("${char.id}", ${JSON.stringify(char).replace(/'/g, "\\'")})'>Edit</button>
+                    <button class="delete-btn" onclick="deleteCharacter('${char.id}')">Delete</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+// ============================================================
+// CHARACTERS — OPEN EDIT MODAL
+// ============================================================
+function openEditModal(id, char) {
+    const form = document.getElementById('characterForm');
+    if (!form) return;
+
+    form.dataset.editId = id;
+    document.getElementById('charName').value = char.name || '';
+    document.getElementById('charHandle').value = char.handle || '';
+    document.getElementById('charRole').value = char.role || '';
+    document.getElementById('charHumanity').value = char.humanity ?? '';
+    document.getElementById('charSpecial').value = char.specialAbility || '';
+
+    const stats = char.stats || {};
+    document.getElementById('stat-int').value = stats.INT ?? '';
+    document.getElementById('stat-ref').value = stats.REF ?? '';
+    document.getElementById('stat-tech').value = stats.TECH ?? '';
+    document.getElementById('stat-cool').value = stats.COOL ?? '';
+    document.getElementById('stat-attr').value = stats.ATTR ?? '';
+    document.getElementById('stat-luck').value = stats.LUCK ?? '';
+
+    form.scrollIntoView({ behavior: 'smooth' });
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.textContent = 'Update Character';
+}
+
+// ============================================================
+// CHARACTERS — CREATE / UPDATE
+// ============================================================
+async function handleFormSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const editId = form.dataset.editId || null;
+
+    const payload = {
+        name: document.getElementById('charName').value.trim(),
+        handle: document.getElementById('charHandle').value.trim(),
+        role: document.getElementById('charRole').value,
+        humanity: parseInt(document.getElementById('charHumanity').value, 10),
+        specialAbility: document.getElementById('charSpecial').value.trim(),
+        stats: {
+            INT: parseInt(document.getElementById('stat-int').value, 10),
+            REF: parseInt(document.getElementById('stat-ref').value, 10),
+            TECH: parseInt(document.getElementById('stat-tech').value, 10),
+            COOL: parseInt(document.getElementById('stat-cool').value, 10),
+            ATTR: parseInt(document.getElementById('stat-attr').value, 10),
+            LUCK: parseInt(document.getElementById('stat-luck').value, 10)
+        }
+    };
+
+    const url = editId ? `${BASE_URL}/characters/${editId}` : `${BASE_URL}/characters`;
+    const method = editId ? 'PUT' : 'POST';
+
+    try {
+        const res = await fetch(url, {
+            method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`,
+                'x-api-key': POSTMAN_API_KEY
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error(`Save failed: ${res.status}`);
+
+        if (editId) {
+            const index = localCharacters.findIndex(c => c.id === editId);
+            if (index !== -1) {
+                localCharacters[index] = { ...payload, id: editId };
+            }
+        } else {
+            localCharacters.push({ ...payload, id: generateId() });
+        }
+
+        saveLocalCharacters();
+
+        form.reset();
+        delete form.dataset.editId;
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) submitBtn.textContent = 'Save Character';
+
+        renderCharacters(localCharacters);
+    } catch (err) {
+        console.error(err);
+        alert(`Error saving character: ${err.message}`);
+    }
+}
+
+// ============================================================
+// CHARACTERS — DELETE
+// ============================================================
+async function deleteCharacter(id) {
+    if (!confirm('Delete this character?')) return;
+
+    try {
+        const res = await fetch(`${BASE_URL}/characters/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'x-api-key': POSTMAN_API_KEY
+            }
+        });
+
+        if (!res.ok) throw new Error(`Delete failed: ${res.status}`);
+
+        localCharacters = localCharacters.filter(c => c.id !== id);
+        saveLocalCharacters();
+        renderCharacters(localCharacters);
+    } catch (err) {
+        console.error(err);
+        alert(`Error deleting character: ${err.message}`);
+    }
+}
