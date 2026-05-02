@@ -11,6 +11,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&display=swap" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.slider').slick({
+      autoplay: true,
+      dots: true,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1
+    });
+  });
+</script>
+
 </head>
 
 <body>
@@ -41,6 +61,19 @@
     <section id="About">
         <h2>About</h2>
         <p>This web app was create by me Gabriel Holmquist, to enhance my character creation and gameplay experience of Cyberpunk 2020 the Table Top Role Playing Game (TTRPG). While I love this game those either un initiated into TTRPG specifically Path Finder and Dungeons and Dragons, might find Cyberpunks character creation confusing or irritating. My goal with this site was to make an easier way for specifically my friends and those new to the paper versions of cyberpunk to immerse themselves in my option one of the most engaging character creation systems.</p>
+    </section>
+
+    <section id="Books">
+        <h3 id="bookHeader">Below are some of the Cyberpunk 2020 books I recommend</h3>
+        
+        <div class="slider autoplay">
+            <div><img src="https://m.media-amazon.com/images/I/61hhYPpP2KL._AC_UF1000,1000_QL80_.jpg" alt="A descriptive text of the image"></div>
+            <div><h3><img src="https://pictures.abebooks.com/isbn/9780937279113-us.jpg" alt="A descriptive text of the image"></h3></div>
+            <div><h3><img src="https://talsorianstore.com/cdn/shop/products/Blackhand_s_600x.jpg?v=1380648594" alt="A descriptive text of the image"></h3></div>
+            <div><h3><img src="https://oxfordcomicsandgames.com/cdn/shop/files/pic521622.webp?v=1695845886" alt="A descriptive text of the image"></h3></div>
+            <div><h3><img src="https://pandemoniumbooks.com/cdn/shop/products/9ae802c55da7810c8f0124c1e7c3d1964affe809.jpg?v=1618846953" alt="A descriptive text of the image"></h3></div>
+            <div><h3><img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1186800725i/1681237.jpg" alt="A descriptive text of the image"></h3></div>
+        </div>
     </section>
 
     <section id="GettingStarted">
@@ -154,8 +187,10 @@
             <button type="submit" class="submit-btn">Save Character</button>
         </form>
     </section>
-    
+
+   
     <script src="script.js"></script>
+
     <footer>
         <ul>
             <li></li>

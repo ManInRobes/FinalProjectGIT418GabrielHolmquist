@@ -1,18 +1,18 @@
-// ============================================================
+
 // CONFIG
-// ============================================================
+
 const BASE_URL = 'https://bceb3183-63d1-4841-bb77-a2804fe906ff.mock.pstmn.io';
 const POSTMAN_API_KEY = localStorage.getItem('postman_api_key') || 'PMAK-69f4ed3226184d00019c7576-cb9b87a1f005e6778033417af2cc7ebe8a';
 
-// ============================================================
+
 // AUTH STATE
-// ============================================================
+
 let authToken = localStorage.getItem('user_char_token') || null;
 let currentUser = localStorage.getItem('current_user') || null;
 
-// ============================================================
+
 // LOCAL CHARACTER STORE
-// ============================================================
+
 let localCharacters = JSON.parse(localStorage.getItem('local_characters') || '[]');
 
 function saveLocalCharacters() {
@@ -23,9 +23,20 @@ function generateId() {
     return 'char_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
 }
 
-// ============================================================
+// Slick
+
+$(document).ready(function(){
+    $('.slider').slick({
+      dots: true,
+      infinite: false, // Prevents clone misalignment
+      speed: 500,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+    });
+  });
+
 // FIRST-VISIT / RETURNING VISITOR LOGIC
-// ============================================================
+
 window.addEventListener('DOMContentLoaded', () => {
     const isReturning = localStorage.getItem('hasVisited');
     const statusDiv = document.getElementById('status');
@@ -62,9 +73,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// ============================================================
+ 
 // DARK MODE
-// ============================================================
+ 
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     const toggleBtn = document.getElementById('light-switch');
@@ -72,9 +83,9 @@ function toggleDarkMode() {
     localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
 }
 
-// ============================================================
+ 
 // AUTH UI
-// ============================================================
+ 
 function updateAuthUI() {
     const statusDiv = document.getElementById('status');
     const logoutBtn = document.getElementById('logoutBtn');
@@ -107,9 +118,9 @@ function logout() {
     if (list) list.innerHTML = '';
 }
 
-// ============================================================
+ 
 // AUTH — LOGIN
-// ============================================================
+ 
 async function handleLogin(e) {
     e.preventDefault();
     const username = document.getElementById('loginUsername').value.trim();
@@ -138,9 +149,9 @@ async function handleLogin(e) {
     }
 }
 
-// ============================================================
+ 
 // AUTH — REGISTER
-// ============================================================
+ 
 async function handleRegister(e) {
     e.preventDefault();
     const username = document.getElementById('registerUsername').value.trim();
@@ -163,9 +174,9 @@ async function handleRegister(e) {
     }
 }
 
-// ============================================================
+ 
 // CHARACTERS — RENDER
-// ============================================================
+ 
 function renderCharacters(characters) {
     const list = document.getElementById('characterList');
     if (!list) return;
@@ -205,9 +216,9 @@ function renderCharacters(characters) {
     }).join('');
 }
 
-// ============================================================
+ 
 // CHARACTERS — OPEN EDIT MODAL
-// ============================================================
+ 
 function openEditModal(id, char) {
     const form = document.getElementById('characterForm');
     if (!form) return;
@@ -232,9 +243,9 @@ function openEditModal(id, char) {
     if (submitBtn) submitBtn.textContent = 'Update Character';
 }
 
-// ============================================================
+ 
 // CHARACTERS — CREATE / UPDATE
-// ============================================================
+ 
 async function handleFormSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -295,9 +306,9 @@ async function handleFormSubmit(e) {
     }
 }
 
-// ============================================================
+ 
 // CHARACTERS — DELETE
-// ============================================================
+ 
 async function deleteCharacter(id) {
     if (!confirm('Delete this character?')) return;
 

@@ -1,5 +1,7 @@
 /* Author Gabriel Holmquist */
 
+
+
 /* Fonts */
 .karantina-light {
   font-family: "Karantina", system-ui;
@@ -158,6 +160,37 @@ h1{
     height: 55px;
 }
 
+#bookHeader{
+    font-size: 48px;
+    padding-top: 25px;
+    margin-bottom: 55px;
+}
+
+/* Slick Caro */
+.slick-slide {
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    display: none; 
+}
+.slick-initialized .slick-slide {
+    display: block; 
+}
+.slick-cloned {
+    display: none 
+}
+
+.slick-track{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+#Books img{
+    width: 360px;
+    height: auto;
+}
+
 #GettingStartedMenu{
     position: relative;
     left: 210px;
@@ -290,6 +323,11 @@ body{
     padding-bottom: 35px; 
 }
 
+#UserCharacters h3{
+    font-size: 42px;
+    padding-top: 25px;
+}
+
 #UserCharHeader{
     position: unset;
     margin-top: 25px;
@@ -407,7 +445,7 @@ body{
 #formHeader{
     position: relative;
     color: var(--primary-section);
-    margin-top: 25px;
+    padding-top: 25px;
     font-size: 32px;
 }
 
