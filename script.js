@@ -25,15 +25,25 @@ function generateId() {
 
 // Slick
 
-$(document).ready(function(){
+  $(document).ready(function(){
     $('.slider').slick({
+      autoplay: true,
       dots: true,
-      infinite: false, // Prevents clone misalignment
-      speed: 500,
+      infinite: true,
       slidesToShow: 3,
-      slidesToScroll: 1,
+      slidesToScroll: 1
     });
   });
+
+// $(document).ready(function(){
+//     $('.slider').slick({
+//       dots: true,
+//       infinite: false, // Prevents clone misalignment
+//       speed: 500,
+//       slidesToShow: 3,
+//       slidesToScroll: 1,
+//     });
+//   });
 
 // FIRST-VISIT / RETURNING VISITOR LOGIC
 
@@ -82,6 +92,31 @@ function toggleDarkMode() {
     if (toggleBtn) toggleBtn.classList.toggle('theme-toggle--toggled');
     localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
 }
+
+// Tabs
+document.addEventListener('DOMContentLoaded', () => {
+    // Select the container
+    const container = document.querySelector('.tab-container');
+    
+    // Select all tabs and panes
+    const tabs = container.querySelectorAll('.tab');
+    const panes = container.querySelectorAll('.tab-pane');
+
+    // Add click event listener to each tab
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            // Remove active class from all panes
+            panes.forEach(p => p.classList.remove('active'));
+            
+            // Add active class to the clicked tab and the corresponding pane
+            tab.classList.add('active');
+            panes[index].classList.add('active');
+        });
+    });
+});
 
  
 // AUTH UI

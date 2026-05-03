@@ -198,6 +198,48 @@ h1{
     height: 55px;
 }
 
+
+    .tab-container{
+        width:60%;
+        margin:100px auto auto auto;
+        font-size: 32px;
+    }
+
+    .tabs{
+        height: 30px;
+        line-height: 30px;
+        font-size: 38px;
+    }
+
+    .tabs .tab {
+        display:inline-block;
+        cursor:pointer;
+        width:100px;
+        text-align:center;
+    }
+
+    .tabs .active {
+        background-color: #efefefa6;
+        color: #000;
+    }
+
+    .tab-panes .tab-pane{
+        border:1px solid #333333;
+        width:400px;
+        padding:20px;
+        display: none
+    }
+    .tab-panes .active{
+        position: relative;
+        display: block;
+        top: 45px;
+        margin: 0 auto;   
+        
+    }
+		
+	
+
+
 #status{
     font-family: 'Karantina', system-ui, sans-serif;
     background-color: #181818;

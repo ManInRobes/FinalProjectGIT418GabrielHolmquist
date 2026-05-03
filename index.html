@@ -19,18 +19,6 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.slider').slick({
-      autoplay: true,
-      dots: true,
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 1
-    });
-  });
-</script>
-
 </head>
 
 <body>
@@ -79,11 +67,24 @@
     <section id="GettingStarted">
         <h2>Getting Started</h2>
         <p>To get started I would recommend you have either a paper or electronic copy of the Cyberpunk 2020 handbook. I own both and can vouch for your local game store or amazon of a paper copy, or DriveThruRpg for a digital copy. It is worth nothing DriveThruRPG has a lot of cool stuff in general and is worth browsing!  Next I would move to (href link) and jump right in to naming and generating your resident of Night City!  </p>
-        <ul>
+        <!-- <ul>
             <li>Cyberpunk 2020 Book (highly recommended)</li>
             <li>Approx... 20-30mins</li>
             <li>Register/Login below to save your data</li>
-        </ul>
+        </ul> -->
+
+        <div class="tab-container">
+            <div class="tabs">
+                <a class="tab active">Books</a>
+                <a class="tab">Dice/ Gameplay</a>
+                <a class="tab">Time</a>
+            </div>
+            <div class="tab-panes">
+                <div class="tab-pane active">Cyberpunk 2020 Book (highly recommended)</div>
+                <div class="tab-pane">D10 dice</div>
+                <div class="tab-pane" >About 20 - 30Mins</div>
+            </div>
+        </div>
     </section>
 
     <section id="authSection" class="form-container">
