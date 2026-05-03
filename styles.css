@@ -74,12 +74,29 @@ table {
 
 /* Variables */
 
+/* Light */
 :root{
-    --primary-background: #FFFFFF;
-    --primary-section: #2D2D2D;
-
+    --page-background: #c08383;
+    --primary-background: #8d2e2e;
+    --primary-button: #571313;
+    --primary-openTab: #b44141;
+    --primary-closedTab: #0e0404;
+    --primary-section: #ebebeb;
+    --primary-header: #2D2D2D;
+    --primary-p: #000000;
 }
 
+/* Dark duh */
+:root .dark-mode{
+    --page-background: #441313;
+    --primary-background: #b33434;
+    --primary-button: #571313;
+    --primary-openTab: #b44141;
+    --primary-closedTab: #310d0d;
+    --primary-section: #000000;
+    --primary-header: #2b1515;
+    --primary-p: #ffffff;
+}
 /* Styles */
 
 #LogoImg{
@@ -91,7 +108,7 @@ table {
 }
 
 header{
-    background-color: var(--primary-section);
+    background-color: var(--primary-header);
     display: flex;
     flex-direction: row;
     position: sticky;
@@ -138,7 +155,7 @@ h1{
 .button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #181818;
+  background-color: var(--primary-button);
   color: white;
   font-size: 36px;
   text-decoration: none;
@@ -219,8 +236,8 @@ h1{
     }
 
     .tabs .active {
-        background-color: #efefefa6;
-        color: #000;
+        background-color: var(--primary-openTab);
+        color: var(--primary-header);
     }
 
     .tab-panes .tab-pane{
@@ -242,8 +259,8 @@ h1{
 
 #status{
     font-family: 'Karantina', system-ui, sans-serif;
-    background-color: #181818;
-    color: white;
+    background-color: var(--primary-openTab);
+    color: var(--primary-p);
     font-size: 24px;
     max-height: 55px;
     padding: 10px 20px;
@@ -255,8 +272,8 @@ h1{
 #actionButton{
     display: none;
     font-family: 'Karantina', system-ui, sans-serif;
-    background-color: #181818;
-    color: white;
+    background-color: var(--primary-header);
+    color: var(--primary-p);
     font-size: 24px;
     text-decoration: none;
     border-radius: 5px;
@@ -271,7 +288,7 @@ body{
         margin: 0 auto;
         max-width: 1280px;
         height: 100vh;
-        background-color: #f0f0f0;
+        background-color: var(--page-background);
         transition: background-color 0.5s;
         text-align: center;
         font-family: 'Karantina', system-ui, sans-serif;
@@ -281,7 +298,7 @@ body{
     .theme-toggle {
         position: relative;
         color: #181818;
-        font-size: 5rem; /* Scale the icon size here */
+        font-size: 5rem; 
         border: none;
         background: none;
         cursor: pointer;
@@ -295,12 +312,16 @@ body{
     }
 
     /* Dark mode styles */
-    .dark-mode {
+    /* .dark-mode {
         background-color: #1a1a1a;
-    }
+        color: #c4c4c4;
+    } */
+
     .dark-mode .theme-toggle {
         color: #ffcc00;
     }
+
+    
 
     body section{
         background-color: var(--primary-section);
@@ -313,6 +334,7 @@ body{
 
     #HeroImageSection{
         background-color: #D9D9D9 ;
+        stroke: var(--primary-header);
     }
 
     body section h2{
@@ -334,24 +356,24 @@ body{
     top: 80px;
     margin: 0 auto;
     width: 933px;
-    color: var(--primary-background);
+    color: var(--primary-p);
     text-align: left;
     font-family: Lexend;
     font-size: 32px;
     font-style: normal;
     font-weight: 300;
-    line-height: 49px; /* 153.125% */
+    line-height: 49px; 
     }
 
     #GettingStarted ul{
     position: relative;
-    color: #FFF;
+    color: var(--primary-p);
     text-align: center;
     font-family: Lexend;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
-    line-height: 43px; /* 179.167% */
+    line-height: 43px; 
     top: 120px;
     }
 
@@ -361,7 +383,6 @@ body{
     min-height: fit-content;
     display: flex; 
     flex-direction: column;
-    /* Use padding to ensure the content is padded inside the container */
     padding-bottom: 35px; 
 }
 
@@ -377,24 +398,36 @@ body{
 
 /* Container for all character cards */
 .roster-container {
-    background-color: #D9D9D9;
+    background-color: var(--primary-closedTab);
+}
+
+.form-group{
+    margin: 15px;
+    background-color: var(--primary-openTab);
+}
+
+.form-group label{
+    color: var(--primary-p);
+}
+
+.stat-input-box{
+    font-size: 25px;
+    margin-top: 5px;
 }
 
 /* Main card for each character */
 .cp2020-card {
-    /* REMOVED position: relative; and top: 35px; */
     margin: 0 auto;
     border-radius: 25px;
     margin-top: 32px;
-    background-color: #D9D9D9;
+    background-color: var(--primary-openTab);
     min-height: fit-content;
     max-width: 1222px;
-    width: 90%; /* Ensures it scales correctly inside its parent */
+    width: 90%; 
 }
 
 /* Header section containing the name and role */
 .cp2020-card .header {
-    /* Changed position to static/default flow */
     color: var(--primary-section);
     font-family: Karantina;
     font-size: 64px;
@@ -402,7 +435,7 @@ body{
     font-weight: 400;
     line-height: normal;
     text-align: center;
-    margin-top: 15px; /* Replaces top: 15px */
+    margin-top: 15px;
 }
 
 /* Grid container for character stats */
@@ -415,7 +448,7 @@ body{
 
 /* Individual stat box */
 .cp2020-card .stat-box {
-    color: #000;
+    color: var(--primary-p);
     text-align: center;
     font-family: Karantina;
     font-size: 40px;
@@ -430,12 +463,12 @@ body{
     position: relative;
     margin: 0 auto;
     width: 30px;
-    background-color: #ce5959;
+    background-color: var(--primary-openTab);
 }
 
 /* Details section */
 .cp2020-card .details-section {
-    color: #000;
+    color: var(--primary-p);
     font-family: Karantina;
     font-size: 30px;
     font-style: normal;
@@ -448,14 +481,14 @@ body{
 .cp2020-card .details-section p {
     all: unset;
     clear: initial;
-    color: #000;
+    color: var(--primary-p);
     font-family: Karantina;
     font-size: 30px;
     font-style: normal;
     font-weight: 300;
     line-height: 25px;
     text-align: center;
-    margin: 25px 0; /* Adjusted margin to keep layout within box model */
+    margin: 25px 0; 
 }
 
 /* New button section styles */
@@ -480,13 +513,14 @@ body{
 /* ADD/ EDIT Character Form */
 
 #characterFormSection{
-    height: 500px;
+    height: auto;
+    padding: 10px;
     background-color: #D9D9D9;
 }
 
 #formHeader{
     position: relative;
-    color: var(--primary-section);
+    color: var(--primary-header);
     padding-top: 25px;
     font-size: 32px;
 }
@@ -498,6 +532,7 @@ body{
     margin: 25px;
     font-size: 28px;
     border-radius: 25px;
+    padding: 10px;
 }
 
 .submit-btn{
