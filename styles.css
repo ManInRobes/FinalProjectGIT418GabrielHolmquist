@@ -216,46 +216,43 @@ h1{
 }
 
 
-    .tab-container{
-        width:60%;
-        margin:100px auto auto auto;
-        font-size: 32px;
-    }
+.tab-container{
+    width:60%;
+    margin:100px auto auto auto;
+    font-size: 32px;
+}
 
-    .tabs{
-        height: 30px;
-        line-height: 30px;
-        font-size: 38px;
-    }
+.tabs{
+    height: 30px;
+    line-height: 30px;
+    font-size: 38px;
+}
 
-    .tabs .tab {
-        display:inline-block;
-        cursor:pointer;
-        width:100px;
-        text-align:center;
-    }
+.tabs .tab {
+    display:inline-block;
+    cursor:pointer;
+    width:100px;
+    text-align:center;
+}
 
-    .tabs .active {
-        background-color: var(--primary-openTab);
-        color: var(--primary-header);
-    }
+.tabs .active {
+    background-color: var(--primary-openTab);
+    color: var(--primary-header);
+}
 
-    .tab-panes .tab-pane{
-        border:1px solid #333333;
-        width:400px;
-        padding:20px;
-        display: none
-    }
-    .tab-panes .active{
-        position: relative;
-        display: block;
-        top: 45px;
-        margin: 0 auto;   
-        
-    }
-		
-	
-
+.tab-panes .tab-pane{
+    border:1px solid #333333;
+    width:400px;
+    padding:20px;
+    display: none
+}
+.tab-panes .active{
+    position: relative;
+    display: block;
+    top: 45px;
+    margin: 0 auto;   
+    
+}
 
 #status{
     font-family: 'Karantina', system-ui, sans-serif;
@@ -292,90 +289,98 @@ body{
         transition: background-color 0.5s;
         text-align: center;
         font-family: 'Karantina', system-ui, sans-serif;
-    }
+}
 
-    /* 2. Adjust size of the toggle */
-    .theme-toggle {
-        position: relative;
-        color: #181818;
-        font-size: 5rem; 
-        border: none;
-        background: none;
-        cursor: pointer;
-        outline: none;
-
-        width: 59px;
-        height: 59px;
-        left: 300px;
-        top: 25px;
-
-    }
-
-    /* Dark mode styles */
-    /* .dark-mode {
-        background-color: #1a1a1a;
-        color: #c4c4c4;
-    } */
-
-    .dark-mode .theme-toggle {
-        color: #ffcc00;
-    }
-
-    
-
-    body section{
-        background-color: var(--primary-section);
-        color: var(--primary-background);
-        margin-bottom: 35px;
-        width: 1280px;
-        height: 697px;
-        border-radius: 25px;
-    }
-
-    #HeroImageSection{
-        background-color: #D9D9D9 ;
-        stroke: var(--primary-header);
-    }
-
-    body section h2{
+/* 2. Adjust size of the toggle */
+.theme-toggle {
     position: relative;
-    top: 47px;
-    width: 431px;
-    left: 20px;
+    color: #181818;
+    font-size: 5rem; 
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+
+    width: 59px;
+    height: 59px;
+    left: 300px;
+    top: 25px;
+
+}
+
+/* Dark mode styles */
+/* .dark-mode {
+    background-color: #1a1a1a;
+    color: #c4c4c4;
+} */
+
+.dark-mode .theme-toggle {
+    color: #ffcc00;
+}
+
+
+
+body section{
+    background-color: var(--primary-section);
     color: var(--primary-background);
-    font-family: Karantina;
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-align: center;
-    }
+    margin-bottom: 35px;
+    width: 1280px;
+    height: 697px;
+    border-radius: 25px;
+}
 
-    body section p{
-    position: relative;
-    top: 80px;
-    margin: 0 auto;
-    width: 933px;
-    color: var(--primary-p);
-    text-align: left;
-    font-family: Lexend;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 49px; 
-    }
+#HeroImageSection{
+    background-color: #D9D9D9 ;
+    stroke: var(--primary-header);
+}
 
-    #GettingStarted ul{
-    position: relative;
-    color: var(--primary-p);
-    text-align: center;
-    font-family: Lexend;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 43px; 
-    top: 120px;
-    }
+body section h2{
+position: relative;
+top: 47px;
+width: 431px;
+left: 20px;
+color: var(--primary-background);
+font-family: Karantina;
+font-size: 64px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-align: center;
+}
+
+body section p{
+position: relative;
+top: 80px;
+margin: 0 auto;
+width: 933px;
+color: var(--primary-p);
+text-align: left;
+font-family: Lexend;
+font-size: 32px;
+font-style: normal;
+font-weight: 300;
+line-height: 49px; 
+}
+
+#GettingStarted ul{
+position: relative;
+color: var(--primary-p);
+text-align: center;
+font-family: Lexend;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 43px; 
+top: 120px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--primary-button);
+}
 
 
 /* Character editing styling */
@@ -401,9 +406,30 @@ body{
     background-color: var(--primary-closedTab);
 }
 
+.form-container{
+    height: auto;
+    padding: 25px;
+    font-size: 32px;
+    font-weight: bolder;
+    margin: 0 auto;
+    max-width: 1222px;
+    margin-bottom: 25px;
+}
+
 .form-group{
     margin: 15px;
     background-color: var(--primary-openTab);
+    font-size: 32px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+#registerForm h4{
+    font-size: 32px;
+}
+
+#loginForm h4{
+    font-size: 32px;
 }
 
 .form-group label{
@@ -545,4 +571,10 @@ body{
     margin: 15px;
 }
 
+footer{
+    padding: 15px;
+    background-color: var(--primary-header);
+    border-radius: 15px 15px 0px 0px;
+    margin: 0 auto;
 
+}
