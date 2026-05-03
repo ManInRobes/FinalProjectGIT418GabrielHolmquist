@@ -95,10 +95,10 @@ header{
     display: flex;
     flex-direction: row;
     position: sticky;
-    top: 0;
+    top: 0px;
     margin-bottom: 65px;
     font-family: 'Karantina', system-ui, sans-serif;
-    font-size: 48;
+    font-size: 48px;
     font-weight: 500;
     max-height: 124px;
     z-index: 5;
