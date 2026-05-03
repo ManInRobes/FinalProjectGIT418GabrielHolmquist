@@ -238,9 +238,9 @@ function renderCharacters(characters) {
                     <div class="stat-box"><div class="stat-title">LUCK</div><div class="stat-value">${stats.LUCK ?? '-'}</div></div>
                 </div>
                 <div class="details-section">
-                    <p><strong>Handle:</strong> ${char.handle || ''}</p>
-                    <p><strong>Humanity:</strong> ${char.humanity ?? 'N/A'}</p>
-                    <p><strong>Special Ability:</strong> ${char.specialAbility || 'N/A'}</p>
+                    <p id="Handle"><strong>Handle:</strong> ${char.handle || ''},</p>
+                    <p id="Humanity"><strong>Humanity:</strong> ${char.humanity ?? 'N/A'},</p>
+                    <p id="SpecialAbility"><strong>Special Ability:</strong> ${char.specialAbility || 'N/A'}</p>
                 </div>
                 <div class="button-section">
                     <button class="edit-btn" onclick='openEditModal("${char.id}", ${JSON.stringify(char).replace(/'/g, "\\'")})'>Edit</button>
